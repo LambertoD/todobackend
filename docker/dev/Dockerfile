@@ -4,7 +4,7 @@ MAINTAINER Lamberto Diwa <lamberto.diwa@dimensiondata.com>
 
 # Intall dev/build dependencies
 RUN apt-get update && \
-    apt-get install -qy python-dev
+    apt-get install -qy python-dev libmysqlclient-dev
 
 # Activate virtual environment and install wheel support
 RUN . /appenv/bin/activate && \
@@ -25,7 +25,7 @@ RUN chmod +x /usr/local/bin/test.sh
 
 # Set defaults for entrypoint and command string
 ENTRYPOINT ["test.sh"]
-CMD ["python", "manage.py", "test", "--", "noinput"]
+CMD ["python", "manage.py", "test", "--noinput"]
 
 # Add application source
 COPY src /application
