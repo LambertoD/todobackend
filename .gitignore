@@ -6,5 +6,6 @@ venv
 # Ignore test artifacts
 src/.coverage
 src/*.xml
+target
 
 
