@@ -1,5 +1,5 @@
 app:
-  buld: ../../
+  build: ../../
   dockerfile: docker/release/Dockerfile
   links:
     - db
@@ -47,7 +47,7 @@ db:
 agent:
   image: ldiwa/ansible
   volumes:
-    - ../../ansible/probe.yml:ansible/site.yml
+    - ../../ansible/probe.yml:/ansible/site.yml
   links:
     - db
   environment:
