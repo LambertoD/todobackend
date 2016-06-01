@@ -16,38 +16,38 @@ DEV_PROJECT := $(REL_PROJECT)dev
 
 test:
 	${INFO} "Building images ..."
-	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) build
+	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) build
 	${INFO} "Ensuring database is ready ..."
-	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up agent
+	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up agent
 	${INFO} "Running tests ..."
-	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up test
+	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up test
 	${INFO} "Testing complete"
 
 build:
 	${INFO} "Building application artifacts ..."
-	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up builder
+	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) up builder
 	${INFO} "Build complete"
 
 release:
 	${INFO} "Building images ..."
-	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) build
+	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) build
 	${INFO} "Ensuring database is ready ..."
-	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up agent
+	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up agent
 	${INFO} "Collecting static files ..."
-	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) run --rm app manage.py collectstatic --noinput
+	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) run --rm app manage.py collectstatic --noinput
 	${INFO} "Running database migrations ..."
-	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) run --rm app manage.py migrate --no-input
+	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) run --rm app manage.py migrate --no-input
 	${INFO} "Running acceptance tests ..."
-	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up test
+	@ docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up test
 	${INFO} "Acceptance testing complete"
 
 clean:
 	${INFO} "Destroying development environment..."
-	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) kill
-	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) rm -f -v
-	docker-compose -p $(DEV_PROJECT) -f $(REL_COMPOSE_FILE) kill
-	docker-compose -p $(DEV_PROJECT) -f $(REL_COMPOSE_FILE) rm -f -v
-	docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
+	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) kill
+	@ docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) rm -f -v
+	@ docker-compose -p $(DEV_PROJECT) -f $(REL_COMPOSE_FILE) kill
+	@ docker-compose -p $(DEV_PROJECT) -f $(REL_COMPOSE_FILE) rm -f -v
+	@ docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
 	${INFO} "Clean complete"
 
 # Cosmetics
