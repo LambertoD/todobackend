@@ -1,1 +1,5 @@
+# Ignore virtual environment
 venv
+
+3 Ignore the reports foler
+reports

@@ -6,7 +6,11 @@ venv
 # Ignore test artifacts
 src/.coverage
 src/*.xml
-reports/*.xml
+# Ignore eggs
+src/*egg-info
+
+# Ignore build and test artifacts
 target
+reports
 
 
