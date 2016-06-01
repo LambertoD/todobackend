@@ -30,11 +30,22 @@ release:
 	docker-compose -p $(REL_PROJECT) -f $(REL_COMPOSE_FILE) up test
 
 clean:
+	${INFO} "Destroying development environment..."
 	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) kill
 	docker-compose -p $(DEV_PROJECT) -f $(DEV_COMPOSE_FILE) rm -f -v
 	docker-compose -p $(DEV_PROJECT) -f $(REL_COMPOSE_FILE) kill
 	docker-compose -p $(DEV_PROJECT) -f $(REL_COMPOSE_FILE) rm -f -v
 	docker images -q -f dangling=true -f label=application=$(REPO_NAME) | xargs -I ARGS docker rmi -f ARGS
+	${INFO} "Clean complete"
 
+# Cosmetics
+YELLOW := "\e[0;33m"
+NC := "\e[0m"
+
+# Shell Functions
+INFO := @bash -c ' \
+  printf $(YELLOW); \
+  echo "=> $$1"; \
+  printf $(NC)' VALUE
 
 
