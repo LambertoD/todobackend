@@ -1,6 +1,6 @@
-FROM ldiwa/todobackend-base
+FROM lambertod/todobackend-base
 
-MAINTAINER Lamberto Diwa <lamberto.diwa@dimensiondata.com>
+MAINTAINER Lamberto Diwa <lambertodiwajr@gmail.com>
 
 # Intall dev/build dependencies
 RUN apt-get update && \

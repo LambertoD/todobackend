@@ -1,6 +1,6 @@
 # Project variables
 PROJECT_NAME ?= todobackend
-ORG_NAME ?= ldiwa
+ORG_NAME ?= lambertod
 REPO_NAME ?= todobackend
 
 # Filename

@@ -21,7 +21,7 @@ builder:
   command: ["pip", "wheel", "--no-index", "-f /build", "."]
 
 agent:
-  image: ldiwa/ansible
+  image: lambertod/ansible
   links:
     - db
   environment:

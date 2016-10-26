@@ -1,5 +1,5 @@
-FROM ldiwa/todobackend-base:latest
-MAINTAINER Lamberto Diwa <lamberto.diwa@dimensiondata.com
+FROM lambertod/todobackend-base:latest
+MAINTAINER Lamberto Diwa <lambertodiwajr@gmail.com>
 
 # COpy application artifacts
 COPY target /wheelhouse
