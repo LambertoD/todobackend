@@ -3,13 +3,13 @@ app:
   dockerfile: docker/release/Dockerfile
   links:
     - db
-  volumes_from:
-    - webroot
   environment:
     DJANGO_SETTINGS_MODULE: todobackend.settings.release
     MYSQL_HOST: db
     MYSQL_USER: todo
     MYSQL_PASSWORD: password
+  volumes_from:
+    - webroot
   command:
     - uwsgi
     - "--socket /var/www/todobackend/todobackend.sock"
